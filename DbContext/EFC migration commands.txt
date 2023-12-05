@@ -1,0 +1,87 @@
+﻿In Windows, open PMC and ensure that the Class Library project, DbContext, is the default project.
+On Mac open a terminal in DbContext project.
+
+
+macOS Database migrations.
+--------------------------------
+On macOS in the terminal, type below commands. After each migration you will get a success confirmation from EFC.
+Use command depending on your database.
+
+SQLServer:
+dotnet ef migrations add initial_migration --context SqlServerDbContext --output-dir Migrations/SqlServerDbContext
+
+MariaDb:
+dotnet ef migrations add initial_migration --context MySqlDbContext --output-dir Migrations/MySqlMigrations
+
+Postgres:
+dotnet ef migrations add initial_migration --context PostgresDbContext --output-dir Migrations/PostgresMigrations
+
+SQLite:
+dotnet ef migrations add initial_migration --context SqliteDbContext --output-dir Migrations/SqliteMigrations
+
+
+Windows Database migrations.
+----------------------------------
+On Windows in the PCM terminal, type below commands. After each migration you will get a success confirmation from EFC.
+Use command depending on your database.
+
+SQLServer:
+add-migration initial_migration -context SqlServerDbContext -outputdir Migrations/SqlServerMigrations
+
+MariaDb:
+add-migration initial_migration --context MySqlDbContext --outputdir Migrations/MySqlMigrations
+
+Postgres:
+add-migration initial_migration --context PostgresDbContext --outputdir Migrations/PostgresMigrations
+
+SQLite:
+add-migration initial_migration --context SqliteDbContext --outputdir Migrations/SqliteMigrations
+
+
+
+macOS Commit the migrations to the Database (create or update the databases).
+----------------------------------------------------------------------------
+On macOS in the terminal, type below commands. After each committment you will get a success confirmation
+SQLServer:
+dotnet ef database update --context SqlServerDbContext
+
+MariaDb:
+dotnet ef database update --context MySqlDbContext
+
+Postgres:
+dotnet ef database update --context PostgresDbContext
+
+SQLite:
+dotnet ef database update --context SqliteDbContext
+
+
+Windows Commit the migrations to the Database (create or update the databases).
+----------------------------------------------------------------------------
+
+On Windows in the PCM terminal, type below commands. After each migration you will get a success confirmation
+SQLServer:
+update-database -context SqlServerDbContext
+
+MariaDb:
+update-database -context MySqlDbContext
+
+Postgres:
+update-database -context PostgresDbContext
+
+SQLite:
+update-database -context SqliteDbContext
+
+
+
+macOS to remove latest migration, e.g. empty migration, that is NOT updated to Database
+----------------------------------------------------------------------------
+
+dotnet ef migrations remove --context SqlServerDbContext
+
+
+macOS revert Database to a specific migration
+-------------------------------------------------
+dotnet ef database update <target_migration> --context SqlServerDbContext
+
+example:
+dotnet ef database update fk_migration6 --context SqlServerDbContext
