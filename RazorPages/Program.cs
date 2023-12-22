@@ -1,7 +1,14 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using DbRepos;
+using Services;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+
+builder.Services.AddScoped<csFriendsDbRepos>();
+builder.Services.AddScoped<IFriendsService, csFriendsServiceDb>();
 
 var app = builder.Build();
 
