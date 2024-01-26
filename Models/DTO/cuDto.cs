@@ -89,14 +89,19 @@ namespace Models.DTO
         public virtual Guid? QuoteId { get; set; }
         public virtual string Quote { get; set; }
         public virtual string Author { get; set; }
+        public virtual Guid? FriendId { get; set; }
+
+
 
         public csQuoteCUdto() { }
         public csQuoteCUdto(IQuote org)
         {
+
             QuoteId = org.QuoteId;
 
             Quote = org.Quote;
             Author = org.Author;
+
         }
     }
 }

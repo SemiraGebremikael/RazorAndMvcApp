@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPages", "RazorPages\RazorPages.csproj", "{FB86E16B-EDFA-49B3-A051-50DCF5A56792}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppGoodFriendsMVC", "AppGoodFriendsMVC\AppGoodFriendsMVC.csproj", "{2DD6D7E9-DB18-407B-89AA-12F7838A5B0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{FB86E16B-EDFA-49B3-A051-50DCF5A56792}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB86E16B-EDFA-49B3-A051-50DCF5A56792}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB86E16B-EDFA-49B3-A051-50DCF5A56792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DD6D7E9-DB18-407B-89AA-12F7838A5B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD6D7E9-DB18-407B-89AA-12F7838A5B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DD6D7E9-DB18-407B-89AA-12F7838A5B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD6D7E9-DB18-407B-89AA-12F7838A5B0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

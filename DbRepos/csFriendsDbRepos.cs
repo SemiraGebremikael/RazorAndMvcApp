@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using Microsoft.Data.SqlClient;
 using System.Reflection.Metadata;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 //DbRepos namespace is a layer to abstract the detailed plumming of
 //retrieveing and modifying and data in the database using EFC.
@@ -32,6 +33,7 @@ public class csFriendsDbRepos
     #region only for layer verification
     private Guid _guid = Guid.NewGuid();
     private string _instanceHello = null;
+    private object _context;
 
     static public string Hello { get; } = $"Hello from namespace {nameof(DbRepos)}, class {nameof(csFriendsDbRepos)}";
     public string InstanceHello => _instanceHello;
@@ -135,7 +137,7 @@ public class csFriendsDbRepos
             for (int c = 0; c < nrOfItems; c++)
             {
                 //Assign addresses. Friends could live on the same address
-                _friends[c].AddressDbM = (_seeder.Bool) ? _seeder.FromList(_addresses) : null;
+                _friends[c].AddressDbM = _seeder.FromList(_addresses);
 
                 //Create between 0 and 3 pets
                 var _pets = new List<csPetDbM>();
@@ -774,7 +776,7 @@ public class csFriendsDbRepos
                 (i.Quote == itemDto.Quote)));
             var _existingItem = await _query2.FirstOrDefaultAsync<csQuoteDbM>();
             if (_existingItem != null && _existingItem.QuoteId != itemDto.QuoteId)
-                throw new ArgumentException($"Item already exist with id {_existingItem.QuoteId}");
+                return _existingItem;
 
 
             //transfer any changes from DTO to database objects
@@ -803,7 +805,8 @@ public class csFriendsDbRepos
                 (i.Quote == itemDto.Quote)));
             var _existingItem = await _query2.FirstOrDefaultAsync<csQuoteDbM>();
             if (_existingItem != null)
-                throw new ArgumentException($"Item already exist with id {_existingItem.QuoteId}");
+                return _existingItem;
+            //throw new ArgumentException($"Item already exist with id {_existingItem.QuoteId}");
 
             //transfer any changes from DTO to database objects
             //Update individual properties 
@@ -977,4 +980,6 @@ public class csFriendsDbRepos
         _itemDst.FriendDbM = owner;
     }
     #endregion
+
 }
+ 

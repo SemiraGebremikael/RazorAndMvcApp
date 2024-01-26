@@ -1,0 +1,127 @@
+﻿
+@model DetailsOfFriendModel
+@{
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@attribute [IgnoreAntiforgeryToken]
+<a href="javascript:window.history.back()" class="text-decoration-none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-left bi-2x" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M5.354 11.354a.5.5 0 0 1 0-.708L2.707 8.5l2.647-2.646a.5.5 0 0 1 .708.708L4.207 8.5l1.854 1.854a.5.5 0 0 1-.708.708z" />
+        <path fill-rule="evenodd" d="M3 8.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3.5a.5.5 0 0 1-.5-.5z" />
+    </svg>
+</a>
+
+<div class="container px-4 py-2" id="DetailsOfFriend">
+
+    <div class="text-bg-dark">
+        <h3 class="pb-2 border-bottom .text-secondary-emphasis"> Comprehensive Snapshot: All About My Friend</h3>
+    </div>
+
+    <form class="needs-validation" novalidate>
+        @if (Model.ErrorMessage != null)
+        {
+            <div class="row mb-1 text-center">
+                <span class="alert alert-danger" role="alert">
+                    @Model.ErrorMessage
+                </span>
+            </div>
+        }
+        else
+        {
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="card-title pl-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="46" fill="currentColor" class="bi bi-person-bounding-box m-2" viewBox="0 0 16 16">
+                                    <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5
+                                    1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5
+                                    0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1
+                                    0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5" />
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                </svg>Friend Data
+                            </h5>
+                            <div class="form-group">
+                                <label for="name">First Name</label>
+                                <span class="form-control">@Model.Friend.FirstName</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="friendid">Last Name</label>
+                                <span class="form-control">@Model.Friend.LastName</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <span class="form-control">@Model.Friend.Email</span>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="address">Address</label>
+                                @if (Model.Friend.Address != null)
+                                {
+                                    <div class="mb-1">
+                                        <span class="form-control">@Model.Friend.Address.StreetAddress</span>
+                                    </div>
+                                    <div class="mb-1">
+                                        <span class="form-control">@Model.Friend.Address.ZipCode</span>
+                                    </div>
+                                    <div class="mb-1">
+                                        <span class="form-control">@Model.Friend.Address.City</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <span class="form-control">@Model.Friend.Address.Country</span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-control mb-3">Has no Address</div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Pets">Pets</label>
+                                @if (Model.Friend.Pets != null && Model.Friend.Pets.Any())
+                                {
+
+                                    @foreach (var pet in Model.Friend.Pets)
+                                    {
+                                        <div class="mb-1">
+                                            <span class="form-control">@pet.Kind</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <span class="form-control">@pet.Mood</span>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="form-control mb-3">Has no Pets</div>
+                                }
+                            </div>
+                            <div class="form-group">
+                                <label for="Quotes">Quotes</label>
+                                @if (Model.Friend.Quotes != null && Model.Friend.Quotes.Any())
+                                {
+                                    @foreach (var quote in Model.Friend.Quotes)
+                                    {
+                                        <div class="mb-1">
+                                            <span class="form-control">@quote.Quote</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <span class="form-control">@quote.Author</span>
+                                        </div>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <div class="form-control mb-3">Has no Quotes</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </form>
+</div>
+<h5>Semira Gebremikael</h5>

@@ -1,41 +1,29 @@
-﻿
-    @page
-    @model RazorPages.Pages.Friends.FriendsByCountryModel
-    @{
-        ViewData["Title"] = "Friends";
-    }
-    @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-    @attribute [IgnoreAntiforgeryToken]
+﻿@page
+@model RazorPages.Pages.Friends.FriendsByCountryModel
+@{
+    ViewData["Title"] = "Friends";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@attribute [IgnoreAntiforgeryToken]
 
-     Page list-of-quotes -->
-    <div class="container px-4 py-4" id="list-of-quotes">
-        <h2 class="pb-2 border-bottom">List of famous quotes</h2>
-
-        <p>Below are some famous quotes about love, work and the fact that tomorrow is another day. Select one that your friend likes.</p>
-        @foreach (var item in Model.Quotes)
+<div class="container px-4 py-4 m-4" id="friends-by-country">
+    <h2 class="pb-2 border-bottom">Friends by Country</h2>
+    <p class="fs-5">Click in on a country below to see what cities my friends are living in.</p>
+    <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+        @foreach (var country in Model.FriendsByCountry)
         {
-            <div class="row mb-2 text-center">
-                <div class="col-md-10 themed-grid-col">
-                    @item.Quote
-                    <div class="col-md-16  text-end">@item.Author</div>
+            <a href="FriendsInCountryOrCity?country=@country.Country" class="text-decoration-none">
+                <div class="col">
+                    <div class="card-riendsByCountry card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+                         style="background-image: url('https://cdn.pixabay.com/photo/2016/01/09/18/27/journey-1130732_1280.jpg'); height: 300px; width: 250px;">
+                        <div class="d-flex flex-column h-100 p-4 pb-3 text-white text-shadow-1 rounded-4">
+                            <h5 class="pt-1 mt-1 mb-4 display-6 lh-1 fw-bold">@country.Country</h5>
+                            <p class="fs-5">@country.FriendCount Friends in @country.Country</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-2 themed-grid-col">
-                    <a href="~/Studies/Model/ModelView?id=@item.QuoteId" class="btn btn-success btn-sm" type="button">View</a>
-                </div>
-            </div>
+            </a>
         }
-     inital template that can be easily hidden 
-    <div class="d-none">
-            <h2 class="pb-2 border-bottom">TEMPLATE</h2>
-            <div class="row mb-2 text-center">
-                <div class="col-md-10 themed-grid-col">
-                    Before you marry a person, you should first make them use a computer with slow Internet to see who they really are.
-                    <div class="col-md-16  text-end">Will Ferrell</div>
-                </div>
-                <div class="col-md-2 themed-grid-col">
-                    <a href="#" class="btn btn-success btn-sm" type="button">View</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
+    </div>
+</div>

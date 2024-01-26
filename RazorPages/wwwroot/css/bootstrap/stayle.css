@@ -1,0 +1,28 @@
+﻿body {
+
+}
+
+.alert-success {
+    margin: 10px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    margin-top: -5px;
+}
+.alert-dismissible {
+    padding:10px;
+}
+
+.alert-dismissible .btn-close {
+        margin-top: -15px;
+        padding-left:0px;
+
+    }
+
+.button-button {
+    margin: 10px;
+    font-size: 20px;
+    justify-content: center;
+}
+
+

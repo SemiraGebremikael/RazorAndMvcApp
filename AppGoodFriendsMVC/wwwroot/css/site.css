@@ -1,0 +1,95 @@
+﻿html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+.alert-success {
+    margin: 10px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    margin-top: -5px;
+}
+
+.alert-dismissible {
+    padding: 10px;
+}
+
+    .alert-dismissible .btn-close {
+        margin-top: -15px;
+        padding-left: 0px;
+    }
+
+.button-button {
+    margin: 10px;
+    font-size: 20px;
+    justify-content: center;
+}
+
+
+.text-decoration-none:hover {
+    color: red;
+}
+
+
+.custom-border {
+    border: 1px solid #837C7C;
+    border-radius: 8px;
+}
+
+.rounded-4 {
+ transition: 0.25s;
+}
+.rounded-4:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+/*GoodFriend css*/
+
+.alert-success {
+    margin: 10px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    margin-top: -5px;
+}
+
+.alert-dismissible {
+    padding: 10px;
+}
+
+    .alert-dismissible .btn-close {
+        margin-top: -15px;
+        padding-left: 0px;
+    }
+
+.button-button {
+    margin: 10px;
+    font-size: 20px;
+    justify-content: center;
+}
+/*GoodFriend css*/

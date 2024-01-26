@@ -1,0 +1,148 @@
+﻿@page
+@model RazorPages.Pages.Friends.ListOfAllFriendsModel
+@{
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@attribute [IgnoreAntiforgeryToken]
+<!-- Page list-of-friends -->
+<div class="container px-4 py-4" id="ListOfAllFriends">
+    <h2 class="pb-2 border-bottom">List of friends</h2>
+    <p>
+        These are my friends. You can search by name or address. You can also view or edit all the details. Sad but
+        possible, if you have the right authorization you could also remove a friend from my database. More fun is it to add a friend, which all my friends can do.
+    </p>
+
+    <div class="row mb-1 text-center">
+        <div class="col-md-8 ">
+            <form class="d-flex mt-3 mt-lg-0" asp-page-handler="Search" method="post">
+                <input class="form-control me-2" type="search" placeholder="Search" for="SearchFilter" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row mt-3 ">
+            <div class="col"><strong>Name</strong></div>
+            <div class="col"><strong>Address</strong></div>
+            <div class="col"><strong>Info</strong></div>
+            <div class="col text-center">
+                <button class="btn btn-success btn-sm mb-1" type="button" data-bs-toggle="modal" data-bs-target="#collapseAdd" style="margin-right: 20px;">Add</button>
+            </div>
+        </div>
+
+        @foreach (var friend in Model.PaginatedFriends.Friends)
+        {
+            <div class="row mb-2  p-2 custom-border">
+                <div class="col">@friend.FirstName @friend.LastName</div>
+                <div class="col">
+                    @if (friend.Address != null)
+                    {
+                        <div>@friend.Address.Country</div>
+                        <div>@friend.Address.City</div>
+                        <div>@friend.Address.StreetAddress</div>
+                        <div>@friend.Address.ZipCode</div>
+                    }
+                    else
+                    {
+                        <div>Has no Address</div>
+                    }
+                </div>
+                <div class="col">
+                    <div>Born: @(friend.Birthday != null ? friend.Birthday.Value.ToString("yyyy-MM-dd") : "")</div>
+                    <div>Pets: @friend.Pets.Count</div>
+                    <div>Quotes: @friend.Quotes.Count</div>
+                </div>
+                <div class="col text-center mt-3">
+                    <a href="DetailsOfFriend?id=@friend.FriendId" class="btn btn-primary btn-sm" role="button">View</a>
+                    <a href="FriendEdit?id=@friend.FriendId" class="btn btn-secondary  btn-sm" role="button">Edit</a>
+                    <a href="#modals" class="btn btn-danger btn-sm" role="button">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+
+
+    <!-- Modal to add a new friend -->
+    <div class="modal fade" id="collapseAdd" tabindex="-1" aria-labelledby="addFriendModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-bg-dark">
+                    <h5 class="modal-title" id="addFriendModalLabel">Add a New Friend</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" required>
+                            <div class="invalid-feedback">Please provide a first name.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" required>
+                            <div class="invalid-feedback">Please provide a last name.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email">
+                            <div class="invalid-feedback">Please provide a valid email.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="petKind" class="form-label">Kind</label>
+                            <input type="text" class="form-control" id="petKind" placeholder="Pet Kind">
+                        </div>
+                        <div class="mb-3">
+                            <label for="petMood" class="form-label">Mood</label>
+                            <input type="text" class="form-control" id="petMood" placeholder="Pet Mood">
+                        </div>
+                        <div class="mb-3">
+                            <label for="quote" class="form-label">Quote</label>
+                            <input type="text" class="form-control" id="quote">
+                        </div>
+                        <div class="mb-3">
+                            <label for="author" class="form-label">Author</label>
+                            <input type="text" class="form-control" id="author">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <button class="btn btn-lg btn-success mb-3" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Pagineringskomponent -->
+    <nav aria-label="Standard pagination-lg">
+        <ul class="pagination ">
+            <li class="page-item @(Model.PaginatedFriends.HasPreviousPage ? string.Empty : "disabled")">
+                <a class="page-link" href="/Friends/ListofAllFriends?pageIndex=@(Model.PaginatedFriends.PageIndex - 1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (var i = 1; i <= Model.PaginatedFriends.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PaginatedFriends.PageIndex ? "active" : string.Empty)">
+                    <a class="page-link" href="/Friends/ListofAllFriends?pageIndex=@i">@i</a>
+                </li>
+            }
+            <li class="page-item @(Model.PaginatedFriends.HasNextPage ? string.Empty : "disabled")">
+                <a class="page-link" href="/Friends/ListofAllFriends?pageIndex=@(Model.PaginatedFriends.PageIndex + 1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+
+
+
+
+

@@ -1,0 +1,57 @@
+﻿@page
+@model RazorPages.Pages.Friends.FriendsOnCityModel
+@{
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@attribute [IgnoreAntiforgeryToken]
+
+
+<a href="javascript:window.history.back()" class="text-decoration-none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-left bi-2x" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M5.354 11.354a.5.5 0 0 1 0-.708L2.707 8.5l2.647-2.646a.5.5 0 0 1 .708.708L4.207 8.5l1.854 1.854a.5.5 0 0 1-.708.708z" />
+        <path fill-rule="evenodd" d="M3 8.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3.5a.5.5 0 0 1-.5-.5z" />
+    </svg>
+</a>
+<div id="FriendsOnCity">
+    <h1>Friends in @Model.City</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Pets</th>
+                <th scope="col">Quotes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var friend in Model.FriendsInCity)
+            {
+                <tr>
+                    <td>@friend.FirstName @friend.LastName</td>
+                    <td>
+                        @if (Model.NumberOfPets.ContainsKey(friend.FriendId))
+                        {
+                            <div>@Model.NumberOfPets[friend.FriendId]</div>
+                        }
+                        else
+                        {
+                            <div>Has no Pets</div>
+                        }
+                    </td>
+                    <td>
+                        @if (Model.NumberOfQuotes.ContainsKey(friend.FriendId))
+                        {
+                            <div>@Model.NumberOfQuotes[friend.FriendId]</div>
+                        }
+                        else
+                        {
+                            <div>Has no Quotes</div>
+                        }
+                    </td>
+                    <td>
+                        <a href="DetailsOfFriend?id=@friend.FriendId" class="btn btn-primary btn-sm" type="button">View</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

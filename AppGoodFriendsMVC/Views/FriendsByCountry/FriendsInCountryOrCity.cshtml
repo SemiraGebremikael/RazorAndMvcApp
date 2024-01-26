@@ -1,0 +1,41 @@
+﻿@model FriendsInCountryOrCityModel 
+
+@{
+    ViewData["Title"] = "Friends in " + Model.Country;
+}
+
+<div class="container px-4 py-4" id="FriendsInCountryOrCity">
+
+    <a href="javascript:window.history.back()" class="text-decoration-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-left bi-2x" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M5.354 11.354a.5.5 0 0 1 0-.708L2.707 8.5l2.647-2.646a.5.5 0 0 1 .708.708L4.207 8.5l1.854 1.854a.5.5 0 0 1-.708.708z" />
+            <path fill-rule="evenodd" d="M3 8.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3.5a.5.5 0 0 1-.5-.5z" />
+        </svg>
+    </a>
+
+    <h2 class="pb-2 border-bottom">Friends in @Model.Addresses.FirstOrDefault()?.Country</h2>
+    <p>Click on a city below to see friends living in that city.</p>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4 py-5">
+        @foreach (var address in Model.Addresses)
+        {
+            var friendsInCity = Model.Friends
+                .Where(f => f.Address != null && f.Address.City == address.City);
+
+            <div class="col d-flex align-items-start">
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em">
+                    <use xlink:href="#home" />
+                </svg>
+                <div class="">
+                    <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">@address.City</h3>
+                    <p class="fs-6">@friendsInCity.Count() friends</p>
+                    <p class="fs-6">@friendsInCity.Sum(f => f.Pets.Count)pets</p>
+                    <a href="FriendsOnCity?city=@address.City" class="btn btn-primary">
+                        See friends
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

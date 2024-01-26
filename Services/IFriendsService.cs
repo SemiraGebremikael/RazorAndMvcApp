@@ -45,7 +45,8 @@ namespace Services
         public Task<IPet> DeletePetAsync(loginUserSessionDto usr, Guid id);
         public Task<IPet> UpdatePetAsync(loginUserSessionDto usr, csPetCUdto item);
         public Task<IPet> CreatePetAsync(loginUserSessionDto usr, csPetCUdto item);
-       
+
+
     }
 }
 
